@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpbin
+  namespace: trackunit
+  labels:
+    app: httpbin
+    service: httpbin
+spec:
+# Making the service available outside the NS
+  type: ExternalName
+  externalName: httpbin.trackunit.svc.cluster.local
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: httpbin
